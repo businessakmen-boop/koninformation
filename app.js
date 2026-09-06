@@ -32,27 +32,70 @@ form?.addEventListener('submit', async (event) => {
   button.textContent = 'Готовлю…';
 
   const message = [
-    'Здравствуйте! Хочу обсудить проект.',
-    `Имя: ${data.get('name')}`,
-    `Контакт: ${data.get('contact')}`,
-    `Тема: ${data.get('topic')}`,
-    `Задача: ${data.get('message')}`,
+    'Здравствуйте! Хочу подать заявку с сайта kon-web.ru.',
+    '',
+    `ФИО: ${data.get('full_name')}`,
+    `Телефон или почта: ${data.get('contact')}`,
+    `Тема обращения: ${data.get('topic')}`,
+    `Комментарий: ${data.get('message')}`,
   ].join('\n');
 
   try {
-    if (navigator.share) {
-      await navigator.share({ title: 'Заявка с сайта kon-web.ru', text: message });
-      status.textContent = 'Меню отправки открыто. Выберите Telegram и подтвердите отправку.';
-    } else if (navigator.clipboard) {
-      await navigator.clipboard.writeText(message);
-      status.innerHTML = 'Текст скопирован. <a href="https://t.me/ak_businesss" target="_blank" rel="noopener">Откройте Telegram</a>, вставьте его и подтвердите отправку.';
-    } else {
-      status.innerHTML = 'Откройте <a href="https://t.me/ak_businesss" target="_blank" rel="noopener">Telegram</a> и отправьте сообщение вручную.';
-    }
+    const telegramUrl = `https://t.me/ak_businesss?text=${encodeURIComponent(message)}`;
+    status.textContent = 'Открываю чат в Telegram с готовой заявкой. Нажмите «Отправить» в Telegram.';
+    window.location.assign(telegramUrl);
   } catch {
     status.textContent = 'Отправка отменена. Введённые данные никуда не переданы.';
   } finally {
     button.disabled = false;
-    button.innerHTML = 'Подготовить сообщение <span aria-hidden="true">→</span>';
+    button.innerHTML = 'Подать заявку в Telegram <span aria-hidden="true">→</span>';
   }
+});
+
+const cursor = document.querySelector('.cursor-follower');
+const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+if (cursor && finePointer) {
+  let targetX = -100;
+  let targetY = -100;
+  let currentX = -100;
+  let currentY = -100;
+
+  window.addEventListener('pointermove', (event) => {
+    targetX = event.clientX;
+    targetY = event.clientY;
+    cursor.classList.add('visible');
+  }, { passive: true });
+
+  document.addEventListener('pointerover', (event) => {
+    cursor.style.setProperty('--cursor-scale', event.target.closest('a, button, input, select, textarea') ? '2.1' : '1');
+  });
+
+  const follow = () => {
+    currentX += (targetX - currentX) * .18;
+    currentY += (targetY - currentY) * .18;
+    cursor.style.setProperty('--cursor-x', `${currentX}px`);
+    cursor.style.setProperty('--cursor-y', `${currentY}px`);
+    requestAnimationFrame(follow);
+  };
+  follow();
+}
+
+const heroArt = document.querySelector('.hero-art');
+heroArt?.addEventListener('pointermove', (event) => {
+  if (!finePointer) return;
+  const rect = heroArt.getBoundingClientRect();
+  const x = (event.clientX - rect.left) / rect.width;
+  const y = (event.clientY - rect.top) / rect.height;
+  heroArt.style.setProperty('--ry', `${(x - .5) * 8}deg`);
+  heroArt.style.setProperty('--rx', `${(.5 - y) * 8}deg`);
+  heroArt.style.setProperty('--spot-x', `${x * 100}%`);
+  heroArt.style.setProperty('--spot-y', `${y * 100}%`);
+});
+
+heroArt?.addEventListener('pointerleave', () => {
+  heroArt.style.setProperty('--ry', '0deg');
+  heroArt.style.setProperty('--rx', '0deg');
+  heroArt.style.setProperty('--spot-x', '50%');
+  heroArt.style.setProperty('--spot-y', '50%');
 });

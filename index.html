@@ -38,18 +38,11 @@
           </div>
           <div class="hero-note">От идеи и анализа до запуска и улучшений</div>
         </div>
-        <div class="hero-art" aria-label="Трёхмерная композиция, символизирующая развитие цифровых проектов">
-          <img class="scene-base" src="assets/climb-scene.webp" alt="Спиральная лестница между цифровыми проектами" width="960" height="1440">
-          <img class="climber" src="assets/climber.webp" alt="Человек поднимается по лестнице к следующему проекту" width="640" height="960">
-          <span class="step-flash flash-1" aria-hidden="true"></span>
-          <span class="step-flash flash-2" aria-hidden="true"></span>
-          <span class="step-flash flash-3" aria-hidden="true"></span>
-          <span class="step-flash flash-4" aria-hidden="true"></span>
-          <span class="step-flash flash-5" aria-hidden="true"></span>
-          <span class="object-flash object-laptop" aria-hidden="true"></span>
-          <span class="object-flash object-globe" aria-hidden="true"></span>
-          <span class="object-flash object-ai" aria-hidden="true"></span>
-          <span class="object-flash object-cloud" aria-hidden="true"></span>
+        <div class="hero-art" aria-label="Путь развития цифрового проекта">
+          <div class="hero-image-frame">
+            <img class="hero-original" src="assets/hero-stairs.png" alt="Человек поднимается по лестнице между цифровыми проектами" width="1024" height="1536">
+          </div>
+          <span class="hero-light" aria-hidden="true"></span>
         </div>
       </div>
     </section>
@@ -139,13 +132,13 @@
           <div class="contact-direct"><a href="https://t.me/ak_businesss" target="_blank" rel="noopener">Telegram — @ak_businesss</a><a href="mailto:business.ak.men@gmail.com">business.ak.men@gmail.com</a></div>
         </div>
         <form class="contact-form" id="contact-form" novalidate>
-          <div class="field"><label for="name">Имя *</label><input id="name" name="name" autocomplete="name" required maxlength="80"></div>
-          <div class="field"><label for="contact-value">Телефон или email *</label><input id="contact-value" name="contact" autocomplete="email" required maxlength="120"></div>
+          <div class="field"><label for="full-name">ФИО *</label><input id="full-name" name="full_name" autocomplete="name" required maxlength="120"></div>
+          <div class="field"><label for="contact-value">Телефон или электронная почта *</label><input id="contact-value" name="contact" autocomplete="email" required maxlength="120" placeholder="+7… или name@example.ru"></div>
           <div class="field full"><label for="topic">Тема обращения *</label><select id="topic" name="topic" required><option value="">Выберите тему</option><option>Создание сайта</option><option>Telegram-бот</option><option>AI для бизнеса</option><option>SMM и реклама</option><option>Обучение</option><option>Другое</option></select></div>
           <div class="field full"><label for="message">Кратко опишите задачу *</label><textarea id="message" name="message" rows="5" required maxlength="2000"></textarea></div>
           <div class="honeypot" aria-hidden="true"><label for="website">Не заполнять</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
-          <label class="check"><input type="checkbox" name="consent" required><span>Я ознакомлен(а) с <a href="privacy.html" target="_blank">Политикой конфиденциальности</a> и понимаю, что сайт только подготовит текст сообщения — отправку через выбранное приложение я подтвержу самостоятельно.</span></label>
-          <button class="button" type="submit">Подготовить сообщение <span aria-hidden="true">→</span></button>
+          <label class="check"><input type="checkbox" name="consent" required><span>Я даю <a href="consent.html" target="_blank">согласие на обработку персональных данных</a>, ознакомлен(а) с <a href="privacy.html" target="_blank">Политикой конфиденциальности</a> и понимаю, что сообщение будет отправлено только после моего подтверждения в Telegram.</span></label>
+          <button class="button" type="submit">Подать заявку в Telegram <span aria-hidden="true">→</span></button>
           <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
         </form>
       </div>
@@ -158,5 +151,6 @@
       <nav class="legal-links" aria-label="Юридические документы"><a href="privacy.html">Политика конфиденциальности</a><a href="consent.html">Согласие на обработку ПДн</a><a href="terms.html">Использование материалов</a></nav>
     </div>
   </footer>
+  <div class="cursor-follower" aria-hidden="true"></div>
 </body>
 </html>
